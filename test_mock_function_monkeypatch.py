@@ -2,13 +2,8 @@ import requests
 
 from mock_function import get_todo_from_id
 
-# Any arguments may be passed and mock_get() will always return our
-# mocked object, which only has the .json() method.
-def mock_get(*args, **kwargs):
-    return MockResponse()
 
-
-def test_get_todo_from_id_success(monkeypatch):
+def test_get_todo_from_id_exists(monkeypatch):
     # custom class to be the mock return value
     class MockResponse(object):
         def __init__(self):
@@ -20,7 +15,7 @@ def test_get_todo_from_id_success(monkeypatch):
         'title': 'some Latin words',
         'completed': False
     }
-    
+
     # Any arguments may be passed and mock_get() will always return our
     # mocked object, which only has the .json() method.
     def mock_get(*args, **kwargs):
@@ -33,8 +28,9 @@ def test_get_todo_from_id_success(monkeypatch):
     result = get_todo_from_id(1)
     assert result["userId"] == 1
     assert result["id"] == 1
+    
 
-def test_get_todo_from_id_fail(monkeypatch):
+def test_get_todo_from_id_not_exists(monkeypatch):
     # custom class to be the mock return value
     class MockResponse(object):
         def __init__(self):
