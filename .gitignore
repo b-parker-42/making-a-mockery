@@ -1,0 +1,7 @@
+__pycache__/**
+.pytest_cache/**
+env/**
+
+# messy notebooks
+test_get_todos.py
+test_mock_function.py
